@@ -1,6 +1,6 @@
 import { Send } from "lucide-react";
 
-export default function RoomTypes() {
+export default function RoomTypes({data}) {
     return (
         <>
             <div className="flex justify-between align-center mb-5">
@@ -9,7 +9,6 @@ export default function RoomTypes() {
             </div>
             <div className="overflow-x-auto rounded-box border border-base-content/5 bg-base-100">
                 <table className="table">
-                    {/* head */}
                     <thead>
                         <tr>
                             <th></th>
@@ -19,27 +18,21 @@ export default function RoomTypes() {
                         </tr>
                     </thead>
                     <tbody>
-                        {/* row 1 */}
-                        <tr>
-                            <th>1</th>
-                            <td>Cy Ganderton</td>
-                            <td>Quality Control Specialist</td>
-                            <td>Blue</td>
-                        </tr>
-                        {/* row 2 */}
-                        <tr>
-                            <th>2</th>
-                            <td>Hart Hagerty</td>
-                            <td>Desktop Support Technician</td>
-                            <td>Purple</td>
-                        </tr>
-                        {/* row 3 */}
-                        <tr>
-                            <th>3</th>
-                            <td>Brice Swyre</td>
-                            <td>Tax Accountant</td>
-                            <td>Red</td>
-                        </tr>
+                        {data.length === 0 && (
+                            <tr><td colSpan="7" className="text-center">No data found</td></tr>
+                        )}
+
+                        {
+                            data.map((item, index) => (
+                                <tr key={index}>
+                                    <th>{index+1}</th>
+                                    <td>{item.name}</td>
+                                    <td>{item.description}</td>
+                                    <td></td>
+                                </tr>
+                            ))
+
+                        }
                     </tbody>
                 </table>
             </div>

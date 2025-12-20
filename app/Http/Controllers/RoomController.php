@@ -2,6 +2,7 @@
 
 namespace App\Http\Controllers;
 
+use App\Models\Room;
 use Illuminate\Http\Request;
 use Inertia\Inertia;
 
@@ -12,7 +13,8 @@ class RoomController extends Controller
      */
     public function index()
     {
-        return Inertia::render('Admin/Rooms/Index');
+        $data = Room::with(['roomType', 'floor', 'amenities'])->orderBy('room_number')->get();
+        return Inertia::render('Admin/Rooms/Index', ['data' => $data]);
     }
 
     /**

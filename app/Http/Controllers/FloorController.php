@@ -2,19 +2,19 @@
 
 namespace App\Http\Controllers;
 
-use App\Models\RoomType;
+use App\Models\Floor;
 use Illuminate\Http\Request;
 use Inertia\Inertia;
 
-class RoomTypeController extends Controller
+class FloorController extends Controller
 {
     /**
      * Display a listing of the resource.
      */
     public function index()
     {
-        $data = RoomType::orderBy('name')->get();
-        return Inertia::render('Admin/RoomTypes/Index', ['data' => $data]);
+        $data = Floor::orderBy('name')->get();
+        return Inertia::render('Admin/Floor/Index', ['data' => $data]);
     }
 
     /**

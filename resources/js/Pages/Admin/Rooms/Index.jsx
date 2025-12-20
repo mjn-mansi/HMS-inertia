@@ -1,6 +1,6 @@
 import { Link } from "@inertiajs/react";
 
-export default function Room() {
+export default function Room({data}) {
     return (
         <>
             <div className="flex justify-between align-center mb-5">
@@ -13,33 +13,34 @@ export default function Room() {
                     <thead>
                         <tr>
                             <th></th>
-                            <th>Name</th>
-                            <th>Description</th>
+                            <th>Room no</th>
+                            <th>Type</th>
+                            <th>Floor</th>
+                            <th>Adult Occupancy</th>
+                            <th>Child Occupancy</th>
+                            <th>Amenities</th>
                             <th>Action</th>
                         </tr>
                     </thead>
                     <tbody>
-                        {/* row 1 */}
-                        <tr>
-                            <th>1</th>
-                            <td>Cy Ganderton</td>
-                            <td>Quality Control Specialist</td>
-                            <td>Blue</td>
-                        </tr>
-                        {/* row 2 */}
-                        <tr>
-                            <th>2</th>
-                            <td>Hart Hagerty</td>
-                            <td>Desktop Support Technician</td>
-                            <td>Purple</td>
-                        </tr>
-                        {/* row 3 */}
-                        <tr>
-                            <th>3</th>
-                            <td>Brice Swyre</td>
-                            <td>Tax Accountant</td>
-                            <td>Red</td>
-                        </tr>
+                        {data.length === 0 && (
+                            <tr><td colSpan="7" className="text-center">No data found</td></tr>
+                        )}
+
+                        {
+                            data.map((item, index) => (
+                                <tr key={index}>
+                                    <th>{index+1}</th>
+                                    <td>{item.room_number}</td>
+                                    <td>{item.roomType?.name ?? '-'}</td>
+                                    <td>{item.floor?.name ?? '-'}</td>
+                                    <td>{item.adult_occupancy}</td>
+                                    <td>{item.child_occupancy}</td>
+                                    <td>{item.amenities.map(amenity => amenity.name).join(', ')}</td>
+                                    <td></td>
+                                </tr>
+                            ))
+                        }
                     </tbody>
                 </table>
             </div>
