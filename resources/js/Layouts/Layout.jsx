@@ -1,3 +1,4 @@
+import { Link } from "@inertiajs/react";
 import { BedDouble, House, HouseHeart, ListCollapse } from "lucide-react";
 
 export default function Layout({ children }) {
@@ -14,7 +15,7 @@ export default function Layout({ children }) {
                     <div className="px-4">Swagat Hotel</div>
                 </nav>
                 {/* Page content here */}
-                <div className="p-4">{children}</div>
+                <div className="p-10 max-w-7xl mx-auto">{children}</div>
             </div>
 
             <div className="drawer-side is-drawer-close:overflow-visible">
@@ -35,24 +36,30 @@ export default function Layout({ children }) {
                         <li>
                             <button className="is-drawer-close:tooltip is-drawer-close:tooltip-right" data-tip="Room Types">
                                 {/* Room Types icon */}
-                                <ListCollapse color="#121212" strokeWidth={1.25} size={20} />
-                                <span className="is-drawer-close:hidden">Room Types</span>
+                                <Link className="flex gap-2" href="/room-types">
+                                    <ListCollapse color="#121212" strokeWidth={1.25} size={20} />
+                                    <span className="is-drawer-close:hidden">Room Types</span>
+                                </Link>
                             </button>
                         </li>
 
                         <li>
                             <button className="is-drawer-close:tooltip is-drawer-close:tooltip-right" data-tip="Amenity">
                                 {/* Amenity icon */}
-                                <BedDouble color="#121212" strokeWidth={1.25} size={20} />
-                                <span className="is-drawer-close:hidden">Amenity</span>
+                                <Link className="flex gap-2" href="/amenities">
+                                    <BedDouble color="#121212" strokeWidth={1.25} size={20} />
+                                    <span className="is-drawer-close:hidden">Amenities</span>
+                                </Link>
                             </button>
                         </li>
 
                         <li>
                             <button className="is-drawer-close:tooltip is-drawer-close:tooltip-right" data-tip="Room">
                                 {/* Room icon */}
-                                <HouseHeart color="#121212" strokeWidth={1.25} size={20}  />
-                                <span className="is-drawer-close:hidden">Room</span>
+                                <Link className="flex gap-2" href="/rooms">
+                                    <HouseHeart color="#121212" strokeWidth={1.25} size={20}  />
+                                    <span className="is-drawer-close:hidden">Room</span>
+                                </Link>
                             </button>
                         </li>
                     </ul>

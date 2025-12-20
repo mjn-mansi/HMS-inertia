@@ -6,6 +6,7 @@
     @viteReactRefresh
     @vite('resources/js/app.jsx')
     @inertiaHead
+    <title>Inertia Hotel Management</title>
 </head>
 
 <body>
