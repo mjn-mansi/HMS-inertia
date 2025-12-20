@@ -44,21 +44,21 @@ export default function Layout({ children }) {
                         </li>
 
                         <li>
-                            <button className="is-drawer-close:tooltip is-drawer-close:tooltip-right" data-tip="Amenity">
-                                {/* Amenity icon */}
-                                <Link className="flex gap-2" href="/amenities">
-                                    <BedDouble color="#121212" strokeWidth={1.25} size={20} />
-                                    <span className="is-drawer-close:hidden">Amenities</span>
-                                </Link>
-                            </button>
-                        </li>
-
-                        <li>
                             <button className="is-drawer-close:tooltip is-drawer-close:tooltip-right" data-tip="Floor">
                                 {/* Floor icon */}
                                 <Link className="flex gap-2" href="/floors">
                                     <LayoutGrid color="#121212" strokeWidth={1.25} size={20}  />
                                     <span className="is-drawer-close:hidden">Floor</span>
+                                </Link>
+                            </button>
+                        </li>
+
+                        <li>
+                            <button className="is-drawer-close:tooltip is-drawer-close:tooltip-right" data-tip="Amenity">
+                                {/* Amenity icon */}
+                                <Link className="flex gap-2" href="/amenities">
+                                    <BedDouble color="#121212" strokeWidth={1.25} size={20} />
+                                    <span className="is-drawer-close:hidden">Amenities</span>
                                 </Link>
                             </button>
                         </li>
