@@ -21,6 +21,10 @@ return new class extends Migration
             $table->date('check_out_date');
             $table->time('check_out_time');
 
+            $table->integer('total_guests');
+            $table->decimal('total_amount', 10, 2);
+            $table->enum('status', ['confirmed', 'due in', 'checkedIn', 'checkedOut', 'cancelled']);
+
             $table->foreign('room_id')->references('id')->on('rooms')->onUpdate('cascade');
             $table->foreign('customer_id')->references('id')->on('customers')->onUpdate('cascade');
 
