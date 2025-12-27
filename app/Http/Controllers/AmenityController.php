@@ -4,6 +4,7 @@ namespace App\Http\Controllers;
 
 use App\Models\Amenity;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\Log;
 use Inertia\Inertia;
 
 class AmenityController extends Controller
@@ -72,6 +73,12 @@ class AmenityController extends Controller
      */
     public function destroy(string $id)
     {
-        //
+        try {
+            Amenity::find($id)->delete();
+            Inertia::flash('message', 'Amenity deleted successfully!');
+        } catch (\Exception $e) {
+            Log::info($e->getMessage());
+            Inertia::flash('error', 'Error deleting Amenity!');
+        }
     }
 }

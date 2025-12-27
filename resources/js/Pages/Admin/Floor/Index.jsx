@@ -49,7 +49,9 @@ export default function Floor({floors}) {
                                 <tr key={index}>
                                     <th>{floors.from + index}</th>
                                     <td>{item.name}</td>
-                                    <td></td>
+                                    <td>
+                                        <Link href={`/floors/${item.id}`} method="delete" as="button" className="btn btn-sm bg-red-500 text-white hover:bg-red-600 cursor-pointer">Delete</Link>
+                                    </td>
                                 </tr>
                             ))
                         }

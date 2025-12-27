@@ -1,12 +1,18 @@
-import { Link } from "@inertiajs/react";
+import { Link, usePage } from "@inertiajs/react";
 
 export default function Room({rooms}) {
+    const {flash} = usePage();
     return (
         <>
             <div className="flex justify-between align-center mb-5">
                 <h1 className="text-xl font-semibold">Rooms</h1>
                 <Link className="btn btn-outline btn-success cursor-pointer" href="/rooms/create">Add New</Link>
             </div>
+
+            {flash.message && (
+                <div className="text-success text-sm font-semibold mb-5">{flash.message}</div>  
+            )}
+
             <div className="overflow-x-auto rounded-box border border-base-content/5 bg-base-100">
                 <table className="table">
                     {/* head */}
@@ -37,7 +43,9 @@ export default function Room({rooms}) {
                                     <td>{item.adult_occupancy}</td>
                                     <td>{item.child_occupancy}</td>
                                     <td>{item.amenities.map(amenity => amenity.name).join(', ')}</td>
-                                    <td></td>
+                                    <td>
+                                        <Link href={`/rooms/${item.id}`} method="delete" as="button" className="btn btn-sm bg-red-500 text-white hover:bg-red-600 cursor-pointer">Delete</Link>
+                                    </td>
                                 </tr>
                             ))
                         }

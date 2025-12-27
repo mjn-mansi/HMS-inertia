@@ -4,6 +4,7 @@ namespace App\Http\Controllers;
 
 use App\Models\Floor;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\Log;
 use Inertia\Inertia;
 
 class FloorController extends Controller
@@ -71,6 +72,12 @@ class FloorController extends Controller
      */
     public function destroy(string $id)
     {
-        //
+        try {
+            Floor::find($id)->delete();
+            Inertia::flash('message', 'Floor deleted successfully!');
+        } catch (\Exception $e) {
+            Log::info($e->getMessage());
+            Inertia::flash('error', 'Error deleting Floor!');
+        }
     }
 }

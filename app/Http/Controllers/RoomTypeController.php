@@ -4,6 +4,7 @@ namespace App\Http\Controllers;
 
 use App\Models\RoomType;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\Log;
 use Inertia\Inertia;
 
 class RoomTypeController extends Controller
@@ -68,6 +69,12 @@ class RoomTypeController extends Controller
      */
     public function destroy(string $id)
     {
-        //
+        try {
+            RoomType::find($id)->delete();
+            Inertia::flash('message', 'Room Type deleted successfully!');
+        } catch (\Exception $e) {
+            Log::info($e->getMessage());
+            Inertia::flash('error', 'Error deleting Room Type!');
+        }
     }
 }

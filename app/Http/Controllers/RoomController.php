@@ -94,6 +94,12 @@ class RoomController extends Controller
      */
     public function destroy(string $id)
     {
-        //
+        try {
+            Room::find($id)->delete();
+            Inertia::flash('message', 'Room deleted successfully!');
+        } catch (\Exception $e) {
+            Log::info($e->getMessage());
+            Inertia::flash('error', 'Error deleting Room!');
+        }
     }
 }

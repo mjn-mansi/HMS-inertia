@@ -55,7 +55,9 @@ export default function Amenity({amenities}) {
                                     <th>{amenities.from + index}</th>
                                     <td>{item.name}</td>
                                     <td>{item.description}</td>
-                                    <td></td>
+                                    <td>
+                                        <Link href={`/amenities/${item.id}`} method="delete" as="button" className="btn btn-sm bg-red-500 text-white hover:bg-red-600 cursor-pointer">Delete</Link>
+                                    </td>
                                 </tr>
                             ))
                         }

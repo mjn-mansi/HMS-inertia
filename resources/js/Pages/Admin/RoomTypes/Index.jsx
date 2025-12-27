@@ -52,7 +52,9 @@ export default function RoomTypes({roomTypes}) {
                                     <th>{roomTypes.from + index}</th>
                                     <td>{item.name}</td>
                                     <td>{item.description}</td>
-                                    <td></td>
+                                    <td>
+                                        <Link href={`/room-types/${item.id}`} method="delete" as="button" className="btn btn-sm bg-red-500 text-white hover:bg-red-600 cursor-pointer">Delete</Link>
+                                    </td>
                                 </tr>
                             ))
 
