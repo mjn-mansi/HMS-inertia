@@ -31,12 +31,16 @@ class AmenityController extends Controller
     public function store(Request $request)
     {
         $request->validate([
-            'name' => 'required|string|max:255',
+            'name' => 'required|string|max:255|unique:amenities,name',
             'description' => 'nullable|string|max:255',
         ]);
 
-        Amenity::updateOrCreate(['name' => $request->name], ['description' => $request->description]);
-        Inertia::flash('message', 'Amenity added successfully!');
+        try {
+            Amenity::updateOrCreate(['name' => $request->name], ['description' => $request->description]);
+            Inertia::flash('message', 'Amenity added successfully!');
+        } catch (\Exception $e) {
+            Inertia::flash('error', 'Error adding amenity: ' . $e->getMessage());
+        }
     }
 
     /**

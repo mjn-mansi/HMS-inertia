@@ -20,7 +20,6 @@ export default function Amenity({amenities}) {
                 document.getElementById('amenity').close();
             }
         })
-        document.getElementById('amenity').close();
     }
 
     return (
@@ -91,9 +90,12 @@ export default function Amenity({amenities}) {
                     <form onSubmit={handleSubmit}>
                         <div className="my-4">
                             <input type="text" placeholder="Enter Amenity here.." value={data.name} onChange={e => setData('name', e.target.value)} className="input w-full" />
+                            {errors.name && <span className="text-xs text-red-500">{errors.name}</span>}
                         </div>
                         <div className="my-4">
                             <textarea placeholder="Enter Description here.." value={data.description} onChange={e=> setData('description', e.target.value)} className="textarea w-full"></textarea>
+                            {errors.description && <span className="text-xs text-red-500">{errors.description}</span>}
+
                         </div>
                         <div className="my-4 text-right">
                             <button type="submit" className="btn btn-success">Save <Send color="#121212" strokeWidth={1.25} size={15} /></button>

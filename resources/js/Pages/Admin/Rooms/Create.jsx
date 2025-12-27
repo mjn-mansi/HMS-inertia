@@ -49,17 +49,21 @@ export default function Room({floors, roomTypes, amenities}) {
                             ))
                         }
                     </select>
+                    {errors.floor_id && <span className="text-xs text-red-500">{errors.floor_id}</span>}
                 </div>
                 <div>
                     <input type="text" placeholder="Enter Room number here.." value={data.room_number} onChange={e => setData('room_number', e.target.value)} className="input w-full"/>
+                    {errors.room_number && <span className="text-xs text-red-500">{errors.room_number}</span>}
                 </div>
 
                 <div>
                     <input type="text" placeholder="Enter Adult Occupancy here.." value={data.adult_occupancy} onChange={e => setData('adult_occupancy', e.target.value)} className="input w-full"/>
+                    {errors.adult_occupancy && <span className="text-xs text-red-500">{errors.adult_occupancy}</span>}
                 </div>
 
                 <div>
                     <input type="text" placeholder="Enter Child Occupancy here.." value={data.child_occupancy} onChange={e => setData('child_occupancy', e.target.value)} className="input w-full"/>
+                    {errors.child_occupancy && <span className="text-xs text-red-500">{errors.child_occupancy}</span>}
                 </div>
 
                 <div>
@@ -75,6 +79,7 @@ export default function Room({floors, roomTypes, amenities}) {
                             ))
                         }
                     </select>
+                    {errors.room_type_id && <span className="text-xs text-red-500">{errors.room_type_id}</span>}
                 </div>
 
                 <div>
@@ -94,6 +99,7 @@ export default function Room({floors, roomTypes, amenities}) {
                             ))
                         }
                     </select>
+                    {errors.amenities && <span className="text-xs text-red-500">{errors.amenities}</span>}
                 </div>
 
 
