@@ -1,13 +1,39 @@
-import { Link } from "@inertiajs/react";
+import { Link, useForm, usePage } from "@inertiajs/react";
 import { Send } from "lucide-react";
 
-export default function Amenity({data}) {
+export default function Amenity({amenities}) {
+
+    const {data, setData, post, reset, processing, errors } = useForm({
+        name: '',
+        description: '',
+    });
+
+    const { flash } = usePage();
+
+    const handleSubmit = (e) => {
+        e.preventDefault();
+        console.log(data);
+        // add amenity to server here
+        post('/amenities', {
+            onSuccess: () => {
+                reset();
+                document.getElementById('amenity').close();
+            }
+        })
+        document.getElementById('amenity').close();
+    }
+
     return (
         <>
             <div className="flex justify-between align-center mb-5">
                 <h1 className="text-xl font-semibold">Amenities</h1>
                 <button className="btn btn-success cursor-pointer btn-outline" onClick={() => document.getElementById('amenity').showModal()}>Add New</button>
             </div>
+
+            {flash.message && (
+                <div className="text-success text-sm font-semibold mb-5">{flash.message}</div>  
+            )}
+
             <div className="overflow-x-auto rounded-box border border-base-content/5 bg-base-100">
                 <table className="table">
                     {/* head */}
@@ -20,14 +46,14 @@ export default function Amenity({data}) {
                         </tr>
                     </thead>
                     <tbody>
-                        {data.total === 0 && (
+                        {amenities.total === 0 && (
                             <tr><td colSpan="7" className="text-center">No data found</td></tr>
                         )}
 
                         {
-                            data.data.map((item, index) => (
+                            amenities.data.map((item, index) => (
                                 <tr key={index}>
-                                    <th>{data.from + index}</th>
+                                    <th>{amenities.from + index}</th>
                                     <td>{item.name}</td>
                                     <td>{item.description}</td>
                                     <td></td>
@@ -41,7 +67,7 @@ export default function Amenity({data}) {
             <div className="flex justify-center my-5">
                 <div className="flex gap-1">
                     {
-                        data.links.map((link, index) => (
+                        amenities.links.map((link, index) => (
 
                             link.url ?
 
@@ -62,15 +88,18 @@ export default function Amenity({data}) {
                         <button className="btn btn-sm btn-circle btn-ghost absolute right-2 top-2">✕</button>
                     </form>
                     <h3 className="font-bold text-lg">Add new Amenity!</h3>
-                    <div className="my-4">
-                        <input type="text" placeholder="Enter Amenity here.." className="input w-full" />
-                    </div>
-                    <div className="my-4">
-                        <textarea placeholder="Enter Description here.." className="textarea w-full"></textarea>
-                    </div>
-                    <div className="my-4 text-right">
-                        <button type="submit" className="btn btn-success">Save <Send color="#121212" strokeWidth={1.25} size={15} /></button>
-                    </div>
+                    <form onSubmit={handleSubmit}>
+                        <div className="my-4">
+                            <input type="text" placeholder="Enter Amenity here.." value={data.name} onChange={e => setData('name', e.target.value)} className="input w-full" />
+                        </div>
+                        <div className="my-4">
+                            <textarea placeholder="Enter Description here.." value={data.description} onChange={e=> setData('description', e.target.value)} className="textarea w-full"></textarea>
+                        </div>
+                        <div className="my-4 text-right">
+                            <button type="submit" className="btn btn-success">Save <Send color="#121212" strokeWidth={1.25} size={15} /></button>
+                        </div>
+                    </form>
+
                 </div>
             </dialog>
         </>

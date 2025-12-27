@@ -14,7 +14,7 @@ class AmenityController extends Controller
     public function index()
     {
         $data = Amenity::orderBy('name')->paginate(10);
-        return Inertia::render('Admin/Amenities/Index', ['data' => $data]);
+        return Inertia::render('Admin/Amenities/Index', ['amenities' => $data]);
     }
 
     /**
@@ -30,7 +30,13 @@ class AmenityController extends Controller
      */
     public function store(Request $request)
     {
-        //
+        $request->validate([
+            'name' => 'required|string|max:255',
+            'description' => 'nullable|string|max:255',
+        ]);
+
+        Amenity::updateOrCreate(['name' => $request->name], ['description' => $request->description]);
+        Inertia::flash('message', 'Amenity added successfully!');
     }
 
     /**

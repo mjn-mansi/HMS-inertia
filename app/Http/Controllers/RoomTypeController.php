@@ -14,7 +14,7 @@ class RoomTypeController extends Controller
     public function index()
     {
         $data = RoomType::orderBy('name')->paginate(10);
-        return Inertia::render('Admin/RoomTypes/Index', ['data' => $data]);
+        return Inertia::render('Admin/RoomTypes/Index', ['roomTypes' => $data]);
     }
 
     /**
@@ -30,7 +30,13 @@ class RoomTypeController extends Controller
      */
     public function store(Request $request)
     {
-        //
+        $request->validate([
+            'name' => 'required|string|max:255',
+            'description' => 'nullable|string|max:255',
+        ]);
+
+        RoomType::updateOrCreate(['name' => $request->name], ['description' => $request->description]);
+        Inertia::flash('message', 'Room Type added successfully!');
     }
 
     /**
