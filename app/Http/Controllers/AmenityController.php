@@ -13,7 +13,7 @@ class AmenityController extends Controller
      */
     public function index()
     {
-        $data = Amenity::orderBy('name')->get();
+        $data = Amenity::orderBy('name')->paginate(10);
         return Inertia::render('Admin/Amenities/Index', ['data' => $data]);
     }
 

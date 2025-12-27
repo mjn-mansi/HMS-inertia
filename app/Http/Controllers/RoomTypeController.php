@@ -13,7 +13,7 @@ class RoomTypeController extends Controller
      */
     public function index()
     {
-        $data = RoomType::orderBy('name')->get();
+        $data = RoomType::orderBy('name')->paginate(10);
         return Inertia::render('Admin/RoomTypes/Index', ['data' => $data]);
     }
 

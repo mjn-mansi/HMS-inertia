@@ -1,3 +1,4 @@
+import { Link } from "@inertiajs/react";
 import { Send } from "lucide-react";
 
 export default function RoomTypes({data}) {
@@ -18,12 +19,12 @@ export default function RoomTypes({data}) {
                         </tr>
                     </thead>
                     <tbody>
-                        {data.length === 0 && (
+                        {data.total.length === 0 && (
                             <tr><td colSpan="7" className="text-center">No data found</td></tr>
                         )}
 
                         {
-                            data.map((item, index) => (
+                            data.data.map((item, index) => (
                                 <tr key={index}>
                                     <th>{index+1}</th>
                                     <td>{item.name}</td>
@@ -35,6 +36,22 @@ export default function RoomTypes({data}) {
                         }
                     </tbody>
                 </table>
+            </div>
+
+            <div className="flex justify-center my-5">
+                <div className="flex gap-1">
+                    {
+                        data.links.map((link, index) => (
+
+                            link.url ?
+
+                                <Link key={index} href={link.url} className={`btn ${link.active ? 'btn-primary' : 'btn-outline-primary'} btn-sm`} dangerouslySetInnerHTML={{__html: link.label}} />
+
+                            :
+                                <span key={index} className="btn btn-outline-secondary btn-sm disabled cursor-not-allowed" dangerouslySetInnerHTML={{__html: link.label}} />
+                        ))
+                    }
+                </div>
             </div>
 
             {/* You can open the modal using document.getElementById('ID').showModal() method */}

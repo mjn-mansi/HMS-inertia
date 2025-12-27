@@ -13,8 +13,8 @@ class FloorController extends Controller
      */
     public function index()
     {
-        $data = Floor::orderBy('name')->get();
-        return Inertia::render('Admin/Floor/Index', ['data' => $data]);
+        $data = Floor::orderBy('name')->paginate(10);
+        return Inertia::render('Admin/Floor/Index', ['floors' => $data]);
     }
 
     /**
@@ -30,7 +30,16 @@ class FloorController extends Controller
      */
     public function store(Request $request)
     {
-        //
+        $request->validate([
+            'name' => 'required|unique:floors,name'
+        ]);
+
+        try {
+            Floor::updateOrCreate(['name' => $request->name]);
+            Inertia::flash('message', 'Floor added successfully!');
+        } catch (\Exception $e) {
+            Inertia::flash('message', 'Error adding floor!');
+        }
     }
 
     /**
