@@ -1,6 +1,6 @@
 import { Link } from "@inertiajs/react";
 
-export default function Room({data}) {
+export default function Room({rooms}) {
     return (
         <>
             <div className="flex justify-between align-center mb-5">
@@ -14,8 +14,8 @@ export default function Room({data}) {
                         <tr>
                             <th></th>
                             <th>Room no</th>
-                            <th>Type</th>
                             <th>Floor</th>
+                            <th>Type</th>
                             <th>Adult Occupancy</th>
                             <th>Child Occupancy</th>
                             <th>Amenities</th>
@@ -23,17 +23,17 @@ export default function Room({data}) {
                         </tr>
                     </thead>
                     <tbody>
-                        {data.length === 0 && (
+                        {rooms.total === 0 && (
                             <tr><td colSpan="7" className="text-center">No data found</td></tr>
                         )}
 
                         {
-                            data.map((item, index) => (
+                            rooms.data.map((item, index) => (
                                 <tr key={index}>
-                                    <th>{index+1}</th>
+                                    <th>{rooms.from + index}</th>
                                     <td>{item.room_number}</td>
-                                    <td>{item.roomType?.name ?? '-'}</td>
                                     <td>{item.floor?.name ?? '-'}</td>
+                                    <td>{item.room_type?.name ?? '-'}</td>
                                     <td>{item.adult_occupancy}</td>
                                     <td>{item.child_occupancy}</td>
                                     <td>{item.amenities.map(amenity => amenity.name).join(', ')}</td>
@@ -43,6 +43,19 @@ export default function Room({data}) {
                         }
                     </tbody>
                 </table>
+            </div>
+
+            <div className="flex justify-center my-5">
+                <div className="flex gap-1">
+                    {
+                        rooms.links.map((link, index) => (
+                            link.url ?
+                                <Link key={index} href={link.url} className={`btn ${link.active ? 'btn-primary' : 'btn-outline-primary'} btn-sm`} dangerouslySetInnerHTML={{__html: link.label}} />
+                            :
+                                <span key={index} className="btn btn-outline-secondary btn-sm disabled cursor-not-allowed" dangerouslySetInnerHTML={{__html: link.label}} />
+                        ))
+                    }
+                </div>
             </div>
         </>
     );

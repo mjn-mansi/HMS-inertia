@@ -13,7 +13,7 @@ class FloorController extends Controller
      */
     public function index()
     {
-        $data = Floor::orderBy('name')->paginate(10);
+        $data = Floor::orderBy('name')->paginate(config('app.per_page'));
         return Inertia::render('Admin/Floor/Index', ['floors' => $data]);
     }
 

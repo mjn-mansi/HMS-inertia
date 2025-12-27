@@ -18,7 +18,6 @@ export default function RoomTypes({roomTypes}) {
                 document.getElementById('roomType').close();
             },
         });
-
     }
 
     return (
@@ -50,7 +49,7 @@ export default function RoomTypes({roomTypes}) {
                         {
                             roomTypes.data.map((item, index) => (
                                 <tr key={index}>
-                                    <th>{index+1}</th>
+                                    <th>{roomTypes.from + index}</th>
                                     <td>{item.name}</td>
                                     <td>{item.description}</td>
                                     <td></td>

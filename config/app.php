@@ -65,8 +65,9 @@ return [
     |
     */
 
-    'timezone' => 'UTC',
+    'timezone' => 'Asia/kolkata',
 
+    'per_page' => ENV('PER_PAGE', 10),
     /*
     |--------------------------------------------------------------------------
     | Application Locale Configuration

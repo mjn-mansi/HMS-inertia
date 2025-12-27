@@ -47,7 +47,7 @@ export default function Floor({floors}) {
                         {
                             floors.data.map((item, index) => (
                                 <tr key={index}>
-                                    <th>{index+1}</th>
+                                    <th>{floors.from + index}</th>
                                     <td>{item.name}</td>
                                     <td></td>
                                 </tr>
